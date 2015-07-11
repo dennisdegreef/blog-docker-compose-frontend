@@ -8,10 +8,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/app/example", name="homepage")
+     * @Route("/", name="homepage")
      */
     public function indexAction()
     {
-        return $this->render('default/index.html.twig');
+        $client = new \Predis\Client(getenv('REDIS_PORT'));
+        $client->set('hello', 'Docker-Compose');
+        $client->incr('increment');
+
+        return $this->render('default/index.html.twig', [
+            'hello' => $client->get('hello'),
+            'increment' => $client->get('increment')
+        ]);
     }
 }

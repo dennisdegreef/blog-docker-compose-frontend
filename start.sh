@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-cd /srv;
-
-./composer.phar install
-
-./app/console server:run
+cd /srv/frontend;
+/srv/frontend/composer.phar install && \
+/srv/frontend/app/console server:run 0.0.0.0:8000
 
