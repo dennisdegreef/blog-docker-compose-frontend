@@ -2,7 +2,7 @@
 
 cd /srv;
 
-composer install
+./composer.phar install
 
 ./app/console server:run
 
